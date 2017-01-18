@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.test.standardweight.MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/app_title"
+        android:gravity="center"
+        android:textColor="@color/colortitle"
+        android:textSize="@dimen/title_margin"
+        android:background="#64c6bdbd"
+        android:id="@+id/textTitle" />
+
+    <TextView
+        android:text="@string/sex_title"
+        android:layout_below="@+id/textTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="25dp"
+        android:textSize="@dimen/title_margin"
+        android:textStyle="bold"
+        android:id="@+id/textSexSelect" />
+
+    <RadioGroup
+        android:id="@+id/radiogroupSex"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/textSexSelect">
+    <RadioButton
+        android:text="@string/sex_man"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioButtonMan" />
+    <RadioButton
+        android:text="@string/sex_women"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioButtonWomen" />
+    </RadioGroup>
+
+    <TextView
+        android:text="@string/height_title"
+        android:layout_width="fill_parent"
+        android:layout_height="25dp"
+        android:layout_below="@+id/radiogroupSex"
+        android:textSize="@dimen/title_margin"
+        android:textStyle="bold"
+        android:id="@+id/textHeightTitle" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:hint="@string/height_inputtips"
+        android:textColorHint="#95A1AA"
+        android:selectAllOnFocus="true"
+        android:inputType="number"
+        android:maxLength="3"
+        android:id="@+id/editTextHeight"
+        android:background="#fafafafa"
+        android:layout_below="@+id/textHeightTitle" />
+
+    <TextView
+        android:text="@string/weight_title"
+        android:layout_width="fill_parent"
+        android:layout_height="25dp"
+        android:layout_below="@+id/editTextHeight"
+        android:textSize="@dimen/title_margin"
+        android:textStyle="bold"
+        android:id="@+id/textWeightTitle" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:hint="@string/weight_inputtips"
+        android:textColorHint="#95A1AA"
+        android:selectAllOnFocus="true"
+        android:inputType="number"
+        android:maxLength="3"
+        android:id="@+id/editTextWeight"
+        android:background="#fafafafa"
+        android:layout_below="@+id/textWeightTitle" />
+
+    <Button
+        android:text="@string/count_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/title_margin"
+        android:id="@+id/buttonCount"
+        android:layout_below="@+id/editTextWeight" />
+
+</RelativeLayout>

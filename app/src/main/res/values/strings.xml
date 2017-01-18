@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">体重计算器</string>
+    <string name="app_title">计算亲的体重是否标准喔</string>
+    <string name="sex_title">你的性别是:</string>
+    <string name="sex_man">帅哥</string>
+    <string name="sex_women">靓女</string>
+    <string name="sex_ladybody">人妖</string>
+    <string name="height_title">你的身高（单位:cm）:</string>
+    <string name="count_title">见证奇迹</string>
+    <string name="height_inputtips">输入身高啦</string>
+    <string name="weight_title">你的体重(单位:kg)</string>
+    <string name="weight_inputtips">还有体重咧</string>
+    <string name="ladybody_tips">没选择性别(人妖滚粗啊~)</string>
+</resources>
