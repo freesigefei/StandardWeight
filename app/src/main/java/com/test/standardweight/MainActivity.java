@@ -1,11 +1,12 @@
 package com.test.standardweight;
 /**
 @author:freesigefei
-该程序的功能是根据用户选择的性别、输入的身高和体重，根据国际计算标准计算用户的体重是否标准，并反馈给用户
+该程序的功能是根据用户选择的性别、输入的身高和体重，根据毫无根据的计算标准计算用户的体重是否标准，并反馈给用户
 **/
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -15,15 +16,20 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 import java.math.BigDecimal;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button countButton;
+    private ToggleButton bgsetupbutton;
     private EditText heightText,weightText;
     private RadioButton manBtn,womenBtn;
     String sex = "";
     double height,actaulweight,standweight;
+    private SnowView mSnowView;
+    private RainView mRainView;
+    int mNum=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +39,20 @@ public class MainActivity extends AppCompatActivity {
         creadView();
         //调用性别选择函数
         sexChoose();
-        //调用Button注册监听器函数
-        setListenner();
+        //调用计算Button注册监听器函数
+        setCountListenner();
+        //首先隐藏雪花和下雨视图，然后调用背景Button注册监听函数并
+        mSnowView.setVisibility(View.GONE);
+        mRainView.setVisibility(View.GONE);
+        setBgSetupListenner();
     }
 
-    //定义响应Button时间的函数
-    private void setListenner(){
+    //定义响应计算Button的函数
+    private void setCountListenner(){
         countButton.setOnClickListener(countListner);
     }
+
+    //定义计算按钮的响应函数
     private View.OnClickListener countListner = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -55,6 +67,56 @@ public class MainActivity extends AppCompatActivity {
             }
             else {
                 Toast.makeText(MainActivity.this, "不负责任的计算结果:" + getWeight(sexChoose()), Toast.LENGTH_LONG).show();
+            }
+        }
+    };
+
+    //定义响应背景设置Button的函数
+    private void setBgSetupListenner(){
+        bgsetupbutton.setOnClickListener(bgsetupListner);
+    }
+
+    //重定义监听背景设置Button的响应函数
+    private View.OnClickListener bgsetupListner = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (mNum) {
+                case 1:
+                case 2:
+                    if (bgsetupbutton.isChecked()) {
+                        bgsetupbutton.setTextOn("雨滴洒落");
+                        mSnowView.setVisibility(View.VISIBLE);
+                        Log.d("free", "bgsetupButton:onClick,点击显示雪花视图 ");
+                    } else {
+                        mSnowView.setVisibility(View.GONE);
+                        Log.d("free", "bgsetupButton:onClick,点击隐藏雪花视图 ");
+                    }
+                    mNum = mNum + 1;
+                    break;
+                case 3:
+                    if (bgsetupbutton.isChecked()) {
+                        bgsetupbutton.setTextOn("雨雪交加");
+                        mRainView.setVisibility(View.VISIBLE);
+                        Log.d("free", "bgsetupButton:onClick,点击显示下雨视图 ");
+                    } else {
+                        mRainView.setVisibility(View.GONE);
+                        Log.d("free", "bgsetupButton:onClick,点击隐藏下雨视图 ");
+                        mNum = mNum+1;
+                    }
+                    break;
+                case 4:
+                    if (bgsetupbutton.isChecked()) {
+                        bgsetupbutton.setTextOn("雪花纷飞");
+                        mRainView.setVisibility(View.VISIBLE);
+                        mSnowView.setVisibility(View.VISIBLE);
+                        Log.d("free", "bgsetupButton:onClick,点击显示下雨/雪花视图 ");
+                    } else {
+                        mRainView.setVisibility(View.GONE);
+                        mSnowView.setVisibility(View.GONE);
+                        Log.d("free", "bgsetupButton:onClick,点击隐藏下雨/雪花视图 ");
+                        mNum = 1;
+                    }
+                    break;
             }
         }
     };
@@ -75,11 +137,14 @@ public class MainActivity extends AppCompatActivity {
 
     //定义创建视图的函数
     public void creadView(){
+        bgsetupbutton=(ToggleButton)findViewById(R.id.bgsetupbutton);
         countButton=(Button)findViewById(R.id.buttonCount);
         heightText=(EditText)findViewById(R.id.editTextHeight);
         weightText=(EditText)findViewById(R.id.editTextWeight);
         manBtn=(RadioButton)findViewById(R.id.radioButtonMan);
         womenBtn=(RadioButton)findViewById(R.id.radioButtonWomen);
+        mSnowView=(SnowView)findViewById(R.id.mSnowView);
+        mRainView=(RainView)findViewById(R.id.mRainView);
     }
 
     //定义计算得到标准体重的函数

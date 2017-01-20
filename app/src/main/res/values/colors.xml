@@ -6,4 +6,6 @@
     <color name="colorbackgroup">#b8b8c9</color>
     <color name="colortitle">#020225</color>
     <color name="colorcontent">#807e0e</color>
+    <color name="colorrain">#ffffff</color>
+    <color name="colorsign">#dfa041</color>
 </resources>
