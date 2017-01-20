@@ -6,23 +6,23 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 /**
- * ÓêµÎµÄÀà, ÒÆ¶¯, ÒÆ³öÆÁÄ»»áÖØĞÂÉèÖÃÎ»ÖÃ
+ * é›¨æ»´çš„ç±», ç§»åŠ¨, ç§»å‡ºå±å¹•ä¼šé‡æ–°è®¾ç½®ä½ç½®
  */
 public class RainFlake {
 
-    // ÓêµÎµÄÒÆ¶¯ËÙ¶È
+    // é›¨æ»´çš„ç§»åŠ¨é€Ÿåº¦
     private static final float INCREMENT_LOWER = 6f;
     private static final float INCREMENT_UPPER = 8f;
 
-    // ÓêµÎµÄ´óĞ¡
+    // é›¨æ»´çš„å¤§å°
     private static final float FLAKE_SIZE_LOWER = 2f;
     private static final float FLAKE_SIZE_UPPER = 5f;
 
-    private final float mIncrement; // ÓêµÎµÄËÙ¶È
-    private final float mFlakeSize; // ÓêµÎµÄ´óĞ¡
-    private final Paint mPaint; // »­±Ê
+    private final float mIncrement; // é›¨æ»´çš„é€Ÿåº¦
+    private final float mFlakeSize; // é›¨æ»´çš„å¤§å°
+    private final Paint mPaint; // ç”»ç¬”
     
-    private Line mLine; // ÓêµÎ
+    private Line mLine; // é›¨æ»´
     
     private RandomGenerator mRandom;
 
@@ -34,7 +34,7 @@ public class RainFlake {
         mPaint = paint;
     }
 
-    //Éú³ÉÓêµÎ
+    //ç”Ÿæˆé›¨æ»´
     public static RainFlake create(int width, int height, Paint paint) {
     	RandomGenerator random = new RandomGenerator();
 		int [] nline;
@@ -46,7 +46,7 @@ public class RainFlake {
         return new RainFlake(random,line, increment, flakeSize, paint);
     }
 
-    // »æÖÆÓêµÎ
+    // ç»˜åˆ¶é›¨æ»´
     public void draw(Canvas canvas) {
         int width = canvas.getWidth();
         int height = canvas.getHeight();
@@ -54,19 +54,19 @@ public class RainFlake {
     }
 
     /**
-     * ¸Ä³ÉÏßÌõ£¬ÀàËÆÓÚÓêµÎĞ§¹û
+     * æ”¹æˆçº¿æ¡ï¼Œç±»ä¼¼äºé›¨æ»´æ•ˆæœ
      * @param canvas
      * @param width
      * @param height
      */
 	private void drawLine(Canvas canvas, int width, int height) {
-		//ÉèÖÃÏß¿í
+		//è®¾ç½®çº¿å®½
 	  mPaint.setStrokeWidth(mFlakeSize);
-		//yÊÇÊúÖ±·½Ïò£¬¾ÍÊÇÏÂÂä
+		//yæ˜¯ç«–ç›´æ–¹å‘ï¼Œå°±æ˜¯ä¸‹è½
       double y1 = mLine.y1 + (mIncrement * Math.sin(1.5));
       double y2 = mLine.y2 + (mIncrement * Math.sin(1.5));
 
-      //Õâ¸öÊÇÉèÖÃÓêµÎÎ»ÖÃ£¬Èç¹ûÔÚºÜ¶ÌÊ±¼äÄÚË¢ĞÂÒ»´Î£¬¾ÍÊÇÁ¬ÆğÀ´µÄ¶¯»­Ğ§¹û
+      //è¿™ä¸ªæ˜¯è®¾ç½®é›¨æ»´ä½ç½®ï¼Œå¦‚æœåœ¨å¾ˆçŸ­æ—¶é—´å†…åˆ·æ–°ä¸€æ¬¡ï¼Œå°±æ˜¯è¿èµ·æ¥çš„åŠ¨ç”»æ•ˆæœ
        mLine.set(mLine.x1,(int) y1,mLine.x2 ,(int) y2);
 		
 		if (!isInsideLine(height)) {
@@ -76,12 +76,12 @@ public class RainFlake {
 		canvas.drawLine(mLine.x1, mLine.y1, mLine.x2, mLine.y2, mPaint);
 	}
 	
-    // ÅĞ¶ÏÊÇ·ñÔÚÆäÖĞ
+    // åˆ¤æ–­æ˜¯å¦åœ¨å…¶ä¸­
     private boolean isInsideLine(int height) {
         return mLine.y1 < height && mLine.y2 < height;
     }
 
-    // ÖØÖÃÓêµÎ
+    // é‡ç½®é›¨æ»´
     private void resetLine(int width, int height) {
 		int [] nline;
 		nline = mRandom.getLine(width, height);
