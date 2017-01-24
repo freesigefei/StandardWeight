@@ -7,29 +7,29 @@ import android.graphics.Paint;
 import android.graphics.Point;
 
 /**
- * Ñ©»¨µÄÀà, ÒÆ¶¯, ÒÆ³öÆÁÄ»»áÖØÐÂÉèÖÃÎ»ÖÃ.
+ * é›ªèŠ±çš„ç±», ç§»åŠ¨, ç§»å‡ºå±å¹•ä¼šé‡æ–°è®¾ç½®ä½ç½®.
  */
 public class SnowFlake {
-    // Ñ©»¨µÄ½Ç¶È
-    private static final float ANGE_RANGE = 0.1f; // ½Ç¶È·¶Î§
-    private static final float HALF_ANGLE_RANGE = ANGE_RANGE / 2f; // Ò»°ãµÄ½Ç¶È
-    private static final float HALF_PI = (float) Math.PI / 2f; // °ëPI
-    private static final float ANGLE_SEED = 25f; // ½Ç¶ÈËæ»úÖÖ×Ó
+    // é›ªèŠ±çš„è§’åº¦
+    private static final float ANGE_RANGE = 0.1f; // è§’åº¦èŒƒå›´
+    private static final float HALF_ANGLE_RANGE = ANGE_RANGE / 2f; // ä¸€èˆ¬çš„è§’åº¦
+    private static final float HALF_PI = (float) Math.PI / 2f; // åŠPI
+    private static final float ANGLE_SEED = 25f; // è§’åº¦éšæœºç§å­
     private static final float ANGLE_DIVISOR = 10000f;
-    // Ñ©»¨µÄÒÆ¶¯ËÙ¶È
+    // é›ªèŠ±çš„ç§»åŠ¨é€Ÿåº¦
     private static final float INCREMENT_LOWER = 2f;
     private static final float INCREMENT_UPPER = 4f;
 
-    // Ñ©»¨µÄ´óÐ¡
+    // é›ªèŠ±çš„å¤§å°
     private static final float FLAKE_SIZE_LOWER = 7f;
     private static final float FLAKE_SIZE_UPPER = 20f;
 
-    private final RandomGenerator mRandom; // Ëæ»ú¿ØÖÆÆ÷
-    private final Point mPosition; // Ñ©»¨Î»ÖÃ
-    private float mAngle; // ½Ç¶È
-    private final float mIncrement; // Ñ©»¨µÄËÙ¶È
-    private final float mFlakeSize; // Ñ©»¨µÄ´óÐ¡
-    private final Paint mPaint; // »­±Ê
+    private final RandomGenerator mRandom; // éšæœºæŽ§åˆ¶å™¨
+    private final Point mPosition; // é›ªèŠ±ä½ç½®
+    private float mAngle; // è§’åº¦
+    private final float mIncrement; // é›ªèŠ±çš„é€Ÿåº¦
+    private final float mFlakeSize; // é›ªèŠ±çš„å¤§å°
+    private final Paint mPaint; // ç”»ç¬”
 
     private SnowFlake(RandomGenerator random, Point position, float angle, float increment, float flakeSize, Paint paint) {
         mRandom = random;
@@ -51,7 +51,7 @@ public class SnowFlake {
         return new SnowFlake(random, position, angle, increment, flakeSize, paint);
     }
 
-    // »æÖÆÑ©»¨
+    // ç»˜åˆ¶é›ªèŠ±
     public void draw(Canvas canvas) {
         int width = canvas.getWidth();
         int height = canvas.getHeight();
@@ -59,37 +59,37 @@ public class SnowFlake {
         canvas.drawCircle(mPosition.x, mPosition.y, mFlakeSize, mPaint);
     }
 
-    // ÒÆ¶¯Ñ©»¨
+    // ç§»åŠ¨é›ªèŠ±
     private void move(int width, int height) {
-    	//xË®Æ½·½Ïò£¬ÄÇÃ´ÐèÒª»Î¶¯£¬Ö÷ÒªÉèÖÃÕâ¸öÖµ¾Í¿ÉÒÔ£¬ÏÖÔÚÈ¡Ïû»Î¶¯ÁË
-    	//Èç¹û mPosition.x²»¼ÓÉÏºóÃæÄÇ¸öÖµ£¬¾Í²»»á»Î¶¯ÁË
-    	double x = mPosition.x + (mIncrement * Math.cos(mAngle));
-        //yÊÇÊúÖ±·½Ïò£¬¾ÍÊÇÏÂÂä
+        //xæ°´å¹³æ–¹å‘ï¼Œé‚£ä¹ˆéœ€è¦æ™ƒåŠ¨ï¼Œä¸»è¦è®¾ç½®è¿™ä¸ªå€¼å°±å¯ä»¥ï¼ŒçŽ°åœ¨å–æ¶ˆæ™ƒåŠ¨äº†
+        //å¦‚æžœ mPosition.xä¸åŠ ä¸ŠåŽé¢é‚£ä¸ªå€¼ï¼Œå°±ä¸ä¼šæ™ƒåŠ¨äº†
+        double x = mPosition.x + (mIncrement * Math.cos(mAngle));
+        //yæ˜¯ç«–ç›´æ–¹å‘ï¼Œå°±æ˜¯ä¸‹è½
         double y = mPosition.y + (mIncrement * Math.sin(mAngle));
- 
+
         mAngle += mRandom.getRandom(-ANGLE_SEED, ANGLE_SEED) / ANGLE_DIVISOR;
-        //Õâ¸öÊÇÉèÖÃÑ©»¨Î»ÖÃ£¬Èç¹ûÔÚºÜ¶ÌÊ±¼äÄÚË¢ÐÂÒ»´Î£¬¾ÍÊÇÁ¬ÆðÀ´µÄ¶¯»­Ð§¹û
+        //è¿™ä¸ªæ˜¯è®¾ç½®é›ªèŠ±ä½ç½®ï¼Œå¦‚æžœåœ¨å¾ˆçŸ­æ—¶é—´å†…åˆ·æ–°ä¸€æ¬¡ï¼Œå°±æ˜¯è¿žèµ·æ¥çš„åŠ¨ç”»æ•ˆæžœ
         mPosition.set((int) x, (int) y);
 
-        // ÒÆ³ýÆÁÄ», ÖØÐÂ¿ªÊ¼
+        // ç§»é™¤å±å¹•, é‡æ–°å¼€å§‹
         if (!isInside(width, height)) {
-            // ÖØÖÃÑ©»¨
+            // é‡ç½®é›ªèŠ±
             reset(width);
         }
     }
-    
-    // ÅÐ¶ÏÊÇ·ñÔÚÆäÖÐ
+
+    // åˆ¤æ–­æ˜¯å¦åœ¨å…¶ä¸­
     private boolean isInside(int width, int height) {
         int x = mPosition.x;
         int y = mPosition.y;
-        //ÅÐ¶Ï×ó±ß£¬ºÍÏÂ±ß£¬ÎÒ²âÊÔµÄÏµÍ³ÊÇ4.4µÄ£¬²»Ö»ÊÇ²»ÊÇ5.0ÒÔÉÏÏµÍ³²»»á³öÏÖÒ»¸öÐ¡ÎÊÌâ
+        //åˆ¤æ–­å·¦è¾¹ï¼Œå’Œä¸‹è¾¹ï¼Œæˆ‘æµ‹è¯•çš„ç³»ç»Ÿæ˜¯4.4çš„ï¼Œä¸åªæ˜¯ä¸æ˜¯5.0ä»¥ä¸Šç³»ç»Ÿä¸ä¼šå‡ºçŽ°ä¸€ä¸ªå°é—®é¢˜
         return x > mFlakeSize -5 && x + mFlakeSize <= width && y >= -mFlakeSize - 1 && y - mFlakeSize < height;
     }
 
-    // ÖØÖÃÑ©»¨
+    // é‡ç½®é›ªèŠ±
     private void reset(int width) {
         mPosition.x = mRandom.getRandom(width);
-        mPosition.y = (int) (-mFlakeSize - 1); // ×îÉÏÃæ
+        mPosition.y = (int) (-mFlakeSize - 1); // æœ€ä¸Šé¢
         mAngle = mRandom.getRandom(ANGLE_SEED) / ANGLE_SEED * ANGE_RANGE + HALF_PI - HALF_ANGLE_RANGE;
     }
 }

@@ -13,4 +13,6 @@
     <string name="ladybody_tips">没选择性别(人妖滚粗啊~)</string>
     <string name="bgsetup_title">默认背景</string>
     <string name="snowsetup_title">雪花纷飞</string>
+    <string name="webview_title">百度</string>
+    <string name="photo_title">拍照</string>
 </resources>

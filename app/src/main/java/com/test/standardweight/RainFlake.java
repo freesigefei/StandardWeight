@@ -21,14 +21,14 @@ public class RainFlake {
     private final float mIncrement; // 雨滴的速度
     private final float mFlakeSize; // 雨滴的大小
     private final Paint mPaint; // 画笔
-    
+
     private Line mLine; // 雨滴
-    
+
     private RandomGenerator mRandom;
 
     private RainFlake(RandomGenerator random,Line line, float increment, float flakeSize, Paint paint) {
-    	mRandom = random;
-    	mLine = line;
+        mRandom = random;
+        mLine = line;
         mIncrement = increment;
         mFlakeSize = flakeSize;
         mPaint = paint;
@@ -36,10 +36,10 @@ public class RainFlake {
 
     //生成雨滴
     public static RainFlake create(int width, int height, Paint paint) {
-    	RandomGenerator random = new RandomGenerator();
-		int [] nline;
-		nline = random.getLine(width, height);
-        
+        RandomGenerator random = new RandomGenerator();
+        int [] nline;
+        nline = random.getLine(width, height);
+
         Line line = new Line(nline[0], nline[1], nline[2], nline[3]);
         float increment = random.getRandom(INCREMENT_LOWER, INCREMENT_UPPER);
         float flakeSize = random.getRandom(FLAKE_SIZE_LOWER, FLAKE_SIZE_UPPER);
@@ -59,23 +59,23 @@ public class RainFlake {
      * @param width
      * @param height
      */
-	private void drawLine(Canvas canvas, int width, int height) {
-		//设置线宽
-	  mPaint.setStrokeWidth(mFlakeSize);
-		//y是竖直方向，就是下落
-      double y1 = mLine.y1 + (mIncrement * Math.sin(1.5));
-      double y2 = mLine.y2 + (mIncrement * Math.sin(1.5));
+    private void drawLine(Canvas canvas, int width, int height) {
+        //设置线宽
+        mPaint.setStrokeWidth(mFlakeSize);
+        //y是竖直方向，就是下落
+        double y1 = mLine.y1 + (mIncrement * Math.sin(1.5));
+        double y2 = mLine.y2 + (mIncrement * Math.sin(1.5));
 
-      //这个是设置雨滴位置，如果在很短时间内刷新一次，就是连起来的动画效果
-       mLine.set(mLine.x1,(int) y1,mLine.x2 ,(int) y2);
-		
-		if (!isInsideLine(height)) {
-			resetLine(width,height);
-		}
-		
-		canvas.drawLine(mLine.x1, mLine.y1, mLine.x2, mLine.y2, mPaint);
-	}
-	
+        //这个是设置雨滴位置，如果在很短时间内刷新一次，就是连起来的动画效果
+        mLine.set(mLine.x1,(int) y1,mLine.x2 ,(int) y2);
+
+        if (!isInsideLine(height)) {
+            resetLine(width,height);
+        }
+
+        canvas.drawLine(mLine.x1, mLine.y1, mLine.x2, mLine.y2, mPaint);
+    }
+
     // 判断是否在其中
     private boolean isInsideLine(int height) {
         return mLine.y1 < height && mLine.y2 < height;
@@ -83,12 +83,12 @@ public class RainFlake {
 
     // 重置雨滴
     private void resetLine(int width, int height) {
-		int [] nline;
-		nline = mRandom.getLine(width, height);
-		mLine.x1 = nline[0];
-		mLine.y1 = nline[1];
-		mLine.x2 = nline[2];
-		mLine.y2 = nline[3];
+        int [] nline;
+        nline = mRandom.getLine(width, height);
+        mLine.x1 = nline[0];
+        mLine.y1 = nline[1];
+        mLine.x2 = nline[2];
+        mLine.y2 = nline[3];
     }
 
 }

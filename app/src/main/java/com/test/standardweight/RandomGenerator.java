@@ -3,31 +3,31 @@ package com.test.standardweight;
 import java.util.Random;
 
 /**
- * Ëæ»úÉú³ÉÆ÷
+ * éšæœºç”Ÿæˆå™¨
  */
 public class RandomGenerator {
     private final Random RANDOM = new Random();
 
-    // Çø¼äËæ»ú
+    // åŒºé—´éšæœº
     public float getRandom(float lower, float upper) {
         float min = Math.min(lower, upper);
         float max = Math.max(lower, upper);
         return getRandom(max - min) + min;
     }
 
-    // ÉÏ½çËæ»ú
+    // ä¸Šç•Œéšæœº
     public float getRandom(float upper) {
         return RANDOM.nextFloat() * upper;
     }
 
-    // ÉÏ½çËæ»ú
+    // ä¸Šç•Œéšæœº
     public int getRandom(int upper) {
         return RANDOM.nextInt(upper);
     }
-    
+
     /**
-     * »ñµÃÒ»¸ö¸ø¶¨·¶Î§µÄËæ»úÕûÊı
-     * ¿ÉÒÔ¸ºÊıµ½ÕıÊı
+     * è·å¾—ä¸€ä¸ªç»™å®šèŒƒå›´çš„éšæœºæ•´æ•°
+     * å¯ä»¥è´Ÿæ•°åˆ°æ­£æ•°
      * @param smallistNum
      * @param BiggestNum
      * @return
@@ -36,22 +36,21 @@ public class RandomGenerator {
         Random random = new Random();
         return (Math.abs(random.nextInt()) % (BiggestNum - smallistNum + 1))+ smallistNum;
     }
-    
-	//Ëæ»ú²úÉú»®ÏßµÄÆğÊ¼µã×ø±êºÍ½áÊøµã×ø±ê
-	public int[] getLine(int height, int width) {
-		int[] tempCheckNum = { 0, 0, 0, 0 };
-		int temp = getRandomWidth(width);
-		for (int i = 0; i < 4; i += 4) {
-			tempCheckNum[i] = temp;
-			tempCheckNum[i + 1] = (int) (Math.random() * height/4);
-			tempCheckNum[i + 2] = temp;
-			tempCheckNum[i + 3] = (int) (Math.random() * height/2);
-		}
-		return tempCheckNum;
-	}
-	
-	public int getRandomWidth(int width){
-		return (int) (Math.random() * width);
-	}
-}
 
+    //éšæœºäº§ç”Ÿåˆ’çº¿çš„èµ·å§‹ç‚¹åæ ‡å’Œç»“æŸç‚¹åæ ‡
+    public int[] getLine(int height, int width) {
+        int[] tempCheckNum = { 0, 0, 0, 0 };
+        int temp = getRandomWidth(width);
+        for (int i = 0; i < 4; i += 4) {
+            tempCheckNum[i] = temp;
+            tempCheckNum[i + 1] = (int) (Math.random() * height/4);
+            tempCheckNum[i + 2] = temp;
+            tempCheckNum[i + 3] = (int) (Math.random() * height/2);
+        }
+        return tempCheckNum;
+    }
+
+    public int getRandomWidth(int width){
+        return (int) (Math.random() * width);
+    }
+}

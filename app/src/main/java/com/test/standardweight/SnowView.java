@@ -8,13 +8,13 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * Ñ©»¨ÊÓÍ¼, DELAYÊ±¼äÖØ»æ, »æÖÆNUM_SNOWFLAKES¸öÑ©»¨
+ * é›ªèŠ±è§†å›¾, DELAYæ—¶é—´é‡ç»˜, ç»˜åˆ¶NUM_SNOWFLAKESä¸ªé›ªèŠ±
  */
 public class SnowView extends View {
 
-    private static final int NUM_SNOWFLAKES = 50; // Ñ©»¨ÊıÁ¿
-    private static final int DELAY = 5; // ÑÓ³Ù
-    private SnowFlake[] mSnowFlakes; // Ñ©»¨
+    private static final int NUM_SNOWFLAKES = 100; // é›ªèŠ±æ•°é‡
+    private static final int DELAY = 5; // å»¶è¿Ÿ
+    private SnowFlake[] mSnowFlakes; // é›ªèŠ±
 
     public SnowView(Context context) {
         super(context);
@@ -28,7 +28,7 @@ public class SnowView extends View {
         super(context, attrs, defStyleAttr);
     }
 
-    @Override 
+    @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         if (w != oldw || h != oldh) {
@@ -37,33 +37,33 @@ public class SnowView extends View {
     }
 
     private void initSnow(int width, int height) {
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG); // ¿¹¾â³İ
-        paint.setColor(Color.WHITE); // °×É«Ñ©»¨
-        paint.setStyle(Paint.Style.FILL); // Ìî³ä;
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG); // æŠ—é”¯é½¿
+        paint.setColor(Color.WHITE); // ç™½è‰²é›ªèŠ±
+        paint.setStyle(Paint.Style.FILL); // å¡«å……;
         mSnowFlakes = new SnowFlake[NUM_SNOWFLAKES];
-        //mSnowFlakesËùÓĞµÄÑ©»¨¶¼Éú³É·Åµ½ÕâÀïÃæ
+        //mSnowFlakesæ‰€æœ‰çš„é›ªèŠ±éƒ½ç”Ÿæˆæ”¾åˆ°è¿™é‡Œé¢
         for (int i = 0; i < NUM_SNOWFLAKES; ++i) {
             mSnowFlakes[i] = SnowFlake.create(width, height, paint);
         }
     }
 
-    @Override 
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        //for·µ»ØSnowFlake
+        //forè¿”å›SnowFlake
         for (SnowFlake s : mSnowFlakes) {
-        	//È»ºó½øĞĞ»æÖÆ
+            //ç„¶åè¿›è¡Œç»˜åˆ¶
             s.draw(canvas);
         }
-        // ¸ôÒ»¶ÎÊ±¼äÖØ»æÒ»´Î, ¶¯»­Ğ§¹û
+        // éš”ä¸€æ®µæ—¶é—´é‡ç»˜ä¸€æ¬¡, åŠ¨ç”»æ•ˆæœ
         getHandler().postDelayed(runnable, DELAY);
     }
 
-    // ÖØ»æÏß³Ì
+    // é‡ç»˜çº¿ç¨‹
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-        	//×Ô¶¯Ë¢ĞÂ
+            //è‡ªåŠ¨åˆ·æ–°
             invalidate();
         }
     };
