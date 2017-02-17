@@ -15,4 +15,5 @@
     <string name="snowsetup_title">雪花纷飞</string>
     <string name="webview_title">百度</string>
     <string name="photo_title">拍照</string>
+    <string name="baidumap_title">百度地图</string>
 </resources>

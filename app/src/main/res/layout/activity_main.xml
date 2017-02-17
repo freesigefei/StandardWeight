@@ -145,4 +145,16 @@
         android:layout_alignBottom="@+id/mWebButton"
         android:layout_toRightOf="@+id/mWebButton" />
 
+    <Button
+        android:text="@string/baidumap_title"
+        android:background="@drawable/baidumap"
+        android:textSize="@dimen/title_margin"
+        android:textColor="@color/colorsign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mBaiduMapButton"
+        android:layout_below="@+id/bgsetupbutton"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="10dp" />
+
 </RelativeLayout>

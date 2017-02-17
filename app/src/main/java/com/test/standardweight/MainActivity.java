@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private RainView mRainView; //下雨视图
     int mNum=1; //用于控制雪花和下雨变换的判断整数
     private Button mPhotoButton; //拍照按钮
+    private Button mBaiduMapButton; //百度地图按钮
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         setWebListenner();
         //调用拍照按钮注册监听函数
         setPhotoListenner();
+        //调用百度地图注册监听函数
+        setMapListenner();
     }
 
     //定义响应计算Button的函数
@@ -158,6 +161,21 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    //定义响百度地图按钮的函数
+    private void setMapListenner(){
+        mBaiduMapButton.setOnClickListener(mapListner);
+    }
+
+    //定义拍照按钮的响应函数
+    private View.OnClickListener mapListner = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent in = new Intent();
+            in.setClassName( getApplicationContext(), "com.test.standardweight.BaiduActivity" );
+            startActivity( in );
+        }
+    };
+
     //定义性别选择函数
     public String sexChoose(){
         if (manBtn.isChecked()){
@@ -184,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
         mRainView=(RainView)findViewById(R.id.mRainView);
         mWebButton=(Button)findViewById(R.id.mWebButton);
         mPhotoButton=(Button)findViewById(R.id.mPhotoButton);
+        mBaiduMapButton=(Button)findViewById(R.id.mBaiduMapButton);
     }
 
     //定义计算得到标准体重的函数
